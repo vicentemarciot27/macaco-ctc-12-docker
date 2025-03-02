@@ -1,0 +1,9 @@
+services:
+  lab1: # Nome do serviço
+    build: .
+    volumes:
+      - ./:/Lab1_Volume # Define o diretório do projeto como o diretório raiz do container
+    command: bash
+    stdin_open: true  # : Mantém a entrada padrão (STDIN) aberta, mesmo que não esteja anexada, permitindo interações com o terminal.
+    tty: true         # Aloca um pseudo-TTY, permitindo que o terminal se comporte como um terminal real, o que é útil para aplicações que precisam de um ambiente interativo.
+

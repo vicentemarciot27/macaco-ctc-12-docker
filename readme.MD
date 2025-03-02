@@ -264,6 +264,3 @@ O professor também enfatiza o uso correto dos containers da STL:
     -   No entanto, a compilação e os testes devem ser realizados usando o CMake e o make, conforme as instruções.
 -   **Não submeta um main():**
     -   Utilize o main() do gtest para rodar os testes. Se precisar de uma main() para testes locais, crie um projeto separado e remova-a antes da submissão.
-#   m a c a c o - c t c - 1 2 - d o c k e r 
- 
- 

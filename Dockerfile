@@ -6,7 +6,7 @@ FROM ubuntu:18.04
 # Atualize o repositório e instale os pacotes necessários
 RUN apt-get update && apt-get upgrade -y && apt-get install -y build-essential git libssl-dev wget
 
-# Instale uma versão específica do CMake a partir dos releases oficiais
+# Instale uma versão que funciona do cmake (a padrão pro ubuntu 18.04 é a 3.10, que vai dar erro e o prof não avisou :O)
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-x86_64.sh -q -O /tmp/cmake-install.sh \
     && chmod u+x /tmp/cmake-install.sh \
     && mkdir -p /opt/cmake \

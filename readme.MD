@@ -30,31 +30,36 @@ O arquivo `Dockerfile` deve estar na raiz do projeto e definir o ambiente de com
 FROM ubuntu:18.04
 
 # Atualize o repositório e instale os pacotes necessários
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    cmake \
-    git \
-    zip \
- && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && apt-get install -y build-essential git libssl-dev wget
 
-# Defina o diretório de trabalho como /src
-WORKDIR /src
+# Instale uma versão que funciona do cmake (a padrão pro ubuntu 18.04 é a 3.10, que vai dar erro e o prof não avisou :O)
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-x86_64.sh -q -O /tmp/cmake-install.sh \
+    && chmod u+x /tmp/cmake-install.sh \
+    && mkdir -p /opt/cmake \
+    && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake \
+    && ln -s /opt/cmake/bin/* /usr/local/bin/ \
+    && rm /tmp/cmake-install.sh
+
+# Defina o diretório de trabalho como a raiz
+WORKDIR /Lab1_Volume
 
 # Inicia um terminal bash
 CMD ["bash"]
+
 ```
 
 # Exemplo de docker-compose.yml
 O arquivo docker-compose.yml permite orquestrar seu container e utilizar caminhos relativos para montar o volume. Exemplo:
 
 ```docker-compose.yml
-version: '3.8'
 services:
-  labx:  # Nome do serviço
+  lab1: # Nome do serviço
     build: .
     volumes:
-      - ./:/src
+      - ./:/Lab1_Volume # Define o diretório do projeto como o diretório raiz do container
     command: bash
+    stdin_open: true  # : Mantém a entrada padrão (STDIN) aberta, mesmo que não esteja anexada, permitindo interações com o terminal.
+    tty: true         # Aloca um pseudo-TTY, permitindo que o terminal se comporte como um terminal real, o que é útil para aplicações que precisam de um ambiente interativo.
 ```
 
 # 3. Construa a imagem Docker

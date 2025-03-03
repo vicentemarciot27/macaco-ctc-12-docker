@@ -1,6 +1,6 @@
 # Bizuário de Docker para CTC-12 com Docker Compose
 
-Este guia explica como criar um ambiente isolado para compilar e testar seu projeto em C, utilizando Docker Compose. Com essa abordagem, você evita usar caminhos absolutos e garante que o ambiente de desenvolvimento seja consistente em diferentes máquinas.
+Este guia explica como criar um ambiente isolado para compilar e testar seu projeto em C++ para a matéria CTC-12, utilizando Docker Compose.
 
 O que o prof chama de lab1hash, eu chamo de LabX.
 
@@ -226,6 +226,11 @@ O professor fornece um script chamado `zipaParaEntregar` para empacotar sua subm
 
     ```bash
     cd LabX
+    ```
+
+    Caso você esteja no diretório build, para subir um diretório, dê
+    ```bash
+    cd ..
     ```
 
 2.  **Execute o script, passando seu nome (sem acentos e espaços) como argumento:**
